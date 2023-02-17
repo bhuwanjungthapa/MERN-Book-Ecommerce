@@ -73,18 +73,33 @@ export const deleteCategory = (id) => {
 export const getAuthors = () => {
     return http.get('author');
 }
+
 export const postAuthor = (data) => {
-    const formData = new FormData();
-    formData.append('name', data.name);
-    formData.append('address', JSON.stringify(data.address)); // Append the address object as a JSON string
-    return http.post('/author', formData, {
-        headers: {
-            'Content-Type': 'multipart/form-data',
-        },
+    const { name, address } = data;
+
+    return http.post('/author', {
+        name,
+        address: {
+            country: address.country,
+            state: address.state,
+            city: address.city
+        }
     });
 };
 
 
+
+
+
 export const deleteAuthor = (id) => {
     return http.delete(`/author/${id}`);
+}
+export const getCoupons = () => {
+    return http.get('coupon');
+}
+export const postCoupon = (data) => {
+    return http.post('/coupon', data)
+}
+export const deleteCoupon = (id) => {
+    return http.delete(`/coupon/${id}`);
 }

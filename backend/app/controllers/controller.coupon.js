@@ -1,19 +1,18 @@
-const Book = require('../models/model.book');
-const upload = require('../helpers/fileUploadHelper');
+const Coupon = require('../models/model.coupon');
 
 
 require('dotenv').config();
 
-// @desc    Get all books
-// @route   GET /api/v1/book
+// @desc    Get all categories
+// @route   GET /api/v1/category
 exports.list = async(req, res) => {
     try {
-        const books = await Book.find();
+        const coupons = await Coupon.find();
         res.status(200).json({
             success: true,
-            count: books.length,
+            count: coupons.length,
             message: "",
-            data: books,
+            data: coupons,
         });
     } catch (err) {
         res.status(500).json({
@@ -24,47 +23,52 @@ exports.list = async(req, res) => {
     }
 }
 
-// @route   POST /api/v1/book
+// @route   POST /api/v1/category
 exports.store = async(req, res) => {
     try {
-        const { title, author, price, discount } = req.body;
-        const image = await upload(req.files.image, "books");
-
-        const book = new Book({
+        const {
             title,
-            author,
-            price,
-            discount,
-            image
+            code,
+            expire_date,
+            start_date,
+            discount_percent,
+            max_amount
+        } = req.body;
+
+        const coupon = await Coupon.create({
+            title,
+            code,
+            expire_date,
+            start_date,
+            discount_percent,
+            max_amount
+
         });
-
-        await book.save();
-
         res.status(200).json({
             success: true,
-            message: "Book created successfully",
-            data: book
+            message: "Coupon created successfully",
+            data: coupon
         });
     } catch (err) {
-        console.log(err); // log the error to the console
         res.status(500).json({
             success: false,
             message: "Server error",
             error: err.message
         });
     }
+
 }
 
 
-// @desc    Delete specific book
-// @route   DELETE /api/v1/book
+// @desc    Delete specific category
+// @route   DELETE /api/v1/category
 exports.destroy = async(req, res) => {
     const { id } = req.params;
     try {
-        await Book.deleteOne({ id });
+        await Coupon.deleteOne({ id });
         res.status(200).json({
             success: true,
-            message: "Book deleted successfully",
+            message: "Coupon deleted successfully",
         });
     } catch (err) {
         res.status(500).json({

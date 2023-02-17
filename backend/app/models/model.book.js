@@ -11,7 +11,7 @@ const bookSchema = new mongoose.Schema({
         required: true
     },
     price: {
-        type: String,
+        type: Number,
         required: true
     },
     discount: {
@@ -21,7 +21,7 @@ const bookSchema = new mongoose.Schema({
         type: String,
         required: true
     }
-
 });
+
 
 module.exports = mongoose.model('Book', bookSchema);

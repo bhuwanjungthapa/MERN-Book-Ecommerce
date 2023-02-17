@@ -26,6 +26,9 @@ function Navbar() {
                         <li className="nav-item">
                             <NavLink to="/admin/Author" className={({isActive}) => (isActive ? "nav-link active" : 'nav-link')}>Author</NavLink>
                         </li>
+                        <li className="nav-item">
+                            <NavLink to="/admin/Coupon" className={({isActive}) => (isActive ? "nav-link active" : 'nav-link')}>Coupon</NavLink>
+                        </li>
                     </ul>
                 </div>
                 <ul className="navbar-nav mr-auto">

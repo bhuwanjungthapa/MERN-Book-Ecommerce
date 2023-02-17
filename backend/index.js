@@ -22,6 +22,8 @@ const authRoutes = require('./app/routes/route.auth');
 const bookRoutes = require('./app/routes/route.book');
 const categoryRoutes = require('./app/routes/route.category');
 const authorRoutes = require('./app/routes/route.author');
+const couponRoutes = require('./app/routes/route.coupon');
+
 
 
 
@@ -32,6 +34,8 @@ app.use('/api/v1/banner', bannerRoutes);
 app.use('/api/v1/book', bookRoutes);
 app.use('/api/v1/category', categoryRoutes);
 app.use('/api/v1/author', authorRoutes);
+app.use('/api/v1/coupon', couponRoutes);
+
 
 
 

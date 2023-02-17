@@ -16,6 +16,10 @@ import Category from "admin/category/views/Index"
 import CreateCategory from "admin/category/views/Create"
 import Author from "admin/author/views/Index"
 import CreateAuthor from "admin/author/views/Create"
+import CreateCoupon from "admin/coupon/views/create"
+import Coupon from "admin/coupon/views/index"
+
+
 
 const router = createBrowserRouter([
     {
@@ -86,6 +90,14 @@ const router = createBrowserRouter([
             {
                 path: "author/create",
                 element: <CreateAuthor />
+            },
+            {
+                path: "coupon",
+                element: <Coupon />
+            },
+            {
+                path: "coupon/create",
+                element: <CreateCoupon />
             }
 
         ]

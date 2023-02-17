@@ -1,35 +1,31 @@
 import validator from "utils/validator";
-import createBookSchema from "utils/createBookSchema";
 import Input from "common/Input";
 import Button from "common/Button";
 import { useState } from "react";
 
-import { postBook } from 'api/request.api';
+import { postCoupon } from 'api/request.api';
 import { useNavigate } from "react-router-dom";
-
+import createCouponSchema from "utils/createCouponSchema";
 function Create() {
     const navigate = useNavigate();
 
     const [data, setData] = useState({
         title: "",
-        author:"",
-        price:"",
-        discount:"",
-        image: ""
+        code:"",
+        expire_date: "",
+        start_date:"",
+        discount_percent:"",
+        max_amount: ""
     });
 
     const [errors, setErrors] = useState({});
 
-    const validate = validator(createBookSchema);
+    const validate = validator(createCouponSchema);
 
     const handleChange = (e) => {
-        if (e.target.name === "image") {
-            setData({ ...data, [e.target.name]: e.target.files[0] });
-          } else {
             const { name, value } = e.target;
             validate(name, value, { errors, setErrors });
             setData({ ...data, [name]: value });
-          }
     }
    
     const isValid = () => {
@@ -47,9 +43,9 @@ function Create() {
 
         if (isValid()) {
             try{
-                const res = await postBook(data);//call axios from register
+                const res = await postCoupon(data);//call axios from register
                 console.log(res);
-                navigate("/admin/book");
+                navigate("/admin/banner");
             }catch(err)
             {
                 setErrors(err.response.data.error);
@@ -66,7 +62,7 @@ function Create() {
                     <div className="col-5">
                         <div className="row">
                             <div className="col-12 text-center">
-                                <h1>Create Book</h1>
+                                <h1>Create Coupon</h1>
                             </div>
 
                             <div className="col-12 border rounded-2 p-5 bg-white">
@@ -81,46 +77,50 @@ function Create() {
                                         handler={handleChange}
                                     />
                                     <Input
-                                        label="Author"
+                                        label="Code"
                                         type="text"
-                                        name="author"
-                                        id="author"
-                                        value={data.author}
-                                        error={errors?.author}
+                                        name="code"
+                                        id="code"
+                                        value={data.code}
+                                        error={errors?.code}
+                                        handler={handleChange}
+                                    />
+                                     <Input
+                                        label="Start Date"
+                                        type="date"
+                                        name="start_date"
+                                        id="start_date"
+                                        value={data.start_date}
+                                        error={errors?.start_date}
                                         handler={handleChange}
                                     />
                                     <Input
-                                        label="Price"
-                                        type="text"
-                                        name="price"
-                                        id="price"
-                                        value={data.price}
-                                        error={errors?.price}
+                                        label="Expire Date"
+                                        type="date"
+                                        name="expire_date"
+                                        id="expire_date"
+                                        value={data.expire_date}
+                                        error={errors?.expire_date}
                                         handler={handleChange}
                                     />
                                     <Input
-                                        label="Discount"
-                                        type="text"
-                                        name="discount"
-                                        id="discount"
-                                        value={data.discount}
-                                        error={errors?.discount}
+                                        label="Discount Percent"
+                                        type="number"
+                                        name="discount_percent"
+                                        id="discount_percent"
+                                        value={data.discount_percent}
+                                        error={errors?.discount_percent}
                                         handler={handleChange}
                                     />
-                                    
-                                    
                                     <Input
-                                        label="Image"
-                                        type="file"
-                                        name="image"
-                                        id="image"
-                                        error={errors?.image}
+                                        label="Maximum Amount"
+                                        type="number"
+                                        name="max_amount"
+                                        id="max_amount"
+                                        value={data.max_amount}
+                                        error={errors?.max_amount}
                                         handler={handleChange}
                                     />
-                                   
-                                    
-                                   
-                                   
                                     <Button
                                         type="submit"
                                         label="Create"
