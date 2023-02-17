@@ -52,3 +52,39 @@ export const postBanner = (data) => {
 export const deleteBanner = (id) => {
     return http.delete(`/banner/${id}`);
 }
+
+
+export const getCategories = () => {
+    return http.get('category');
+}
+export const postCategory = (data) => {
+    const formData = new FormData();
+    formData.append('title', data.title);
+    return http.post('/category', formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    });
+}
+export const deleteCategory = (id) => {
+    return http.delete(`/category/${id}`);
+}
+
+export const getAuthors = () => {
+    return http.get('author');
+}
+export const postAuthor = (data) => {
+    const formData = new FormData();
+    formData.append('name', data.name);
+    formData.append('address', JSON.stringify(data.address)); // Append the address object as a JSON string
+    return http.post('/author', formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    });
+};
+
+
+export const deleteAuthor = (id) => {
+    return http.delete(`/author/${id}`);
+}

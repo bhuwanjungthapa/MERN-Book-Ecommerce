@@ -12,6 +12,10 @@ import Book from "admin/book/views/Index"
 import CreateBook from "admin/book/views/Create"
 import Banner from "admin/banner/views/Index"
 import CreateBanner from "admin/banner/views/Create"
+import Category from "admin/category/views/Index"
+import CreateCategory from "admin/category/views/Create"
+import Author from "admin/author/views/Index"
+import CreateAuthor from "admin/author/views/Create"
 
 const router = createBrowserRouter([
     {
@@ -66,6 +70,22 @@ const router = createBrowserRouter([
             {
                 path: "banner/create",
                 element: <CreateBanner />
+            },
+            {
+                path: "category",
+                element: <Category />
+            },
+            {
+                path: "category/create",
+                element: <CreateCategory />
+            },
+            {
+                path: "author",
+                element: <Author />
+            },
+            {
+                path: "author/create",
+                element: <CreateAuthor />
             }
 
         ]

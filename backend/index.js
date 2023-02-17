@@ -20,12 +20,19 @@ const userRoutes = require('./app/routes/route.user');
 const bannerRoutes = require('./app/routes/route.banner');
 const authRoutes = require('./app/routes/route.auth');
 const bookRoutes = require('./app/routes/route.book');
+const categoryRoutes = require('./app/routes/route.category');
+const authorRoutes = require('./app/routes/route.author');
+
+
 
 
 app.use('/api/v1', authRoutes);
 app.use('/api/v1/user', userRoutes);
 app.use('/api/v1/banner', bannerRoutes);
 app.use('/api/v1/book', bookRoutes);
+app.use('/api/v1/category', categoryRoutes);
+app.use('/api/v1/author', authorRoutes);
+
 
 
 const verifyJWT = require('./app/middlewares/verifyJWT');
