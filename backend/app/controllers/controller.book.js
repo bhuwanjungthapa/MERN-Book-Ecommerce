@@ -27,7 +27,7 @@ exports.list = async(req, res) => {
 // @route   POST /api/v1/book
 exports.store = async(req, res) => {
     try {
-        const { title, author, price, discount } = req.body;
+        const { title, author, price, discount, category } = req.body;
         const image = await upload(req.files.image, "books");
 
         const book = new Book({
@@ -35,8 +35,10 @@ exports.store = async(req, res) => {
             author,
             price,
             discount,
-            image
+            image,
+            category
         });
+
 
         await book.save();
 

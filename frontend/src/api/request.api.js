@@ -16,25 +16,7 @@ export const login = (credential) => {
     return http.post(`/login`, credential);
 }
 
-export const getBooks = () => {
-    return http.get('book');
-}
-export const postBook = (data) => {
-    const formData = new FormData();
-    formData.append('title', data.title);
-    formData.append('author', data.author);
-    formData.append('image', data.image);
-    formData.append('price', data.price);
-    formData.append('discount', data.discount);
-    return http.post('/book', formData, {
-        headers: {
-            'Content-Type': 'multipart/form-data'
-        }
-    });
-}
-export const deleteBook = (id) => {
-    return http.delete(`/book/${id}`);
-}
+
 export const getBanners = () => {
     return http.get('banner');
 }
@@ -102,4 +84,43 @@ export const postCoupon = (data) => {
 }
 export const deleteCoupon = (id) => {
     return http.delete(`/coupon/${id}`);
+}
+export const getBooks = () => {
+    return http.get('book');
+}
+export const postBook = async(data) => {
+    try {
+        const authorRes = await getAuthors();
+        const categoryRes = await getCategories();
+        const author = authorRes.data.find((a) => a._id === data.author?._id);
+        const category = categoryRes.data.find((c) => c.title === data.category?.title);
+
+        const formData = new FormData();
+        formData.append('title', data.title);
+        formData.append('author', author?._id);
+        formData.append('category', category?.title);
+        formData.append('price', data.price);
+        formData.append('discount', data.discount);
+        formData.append('image', data.image);
+
+        const response = await http.post('/book', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+
+
+
+
+
+
+
+export const deleteBook = (id) => {
+    return http.delete(`/book/${id}`);
 }

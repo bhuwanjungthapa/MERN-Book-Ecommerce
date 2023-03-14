@@ -100,7 +100,6 @@ function Login() {
                                     />
 
                                     <Button label="Login" type="submit" color="primary" />
-                                    { user?.name }
                                 </form>
                             </div>
                         </div>

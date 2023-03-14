@@ -1,26 +1,19 @@
-const { string } = require('joi');
-const mongoose = require('mongoose');
+// book.js
 
-const bookSchema = new mongoose.Schema({
-    title: {
-        type: String,
-        required: true
-    },
-    author: {
-        type: String,
-        required: true
-    },
-    price: {
-        type: Number,
-        required: true
-    },
-    discount: {
-        type: String
-    },
-    image: {
-        type: String,
-        required: true
-    }
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
+
+
+
+const bookSchema = new Schema({
+    title: { type: String, required: true },
+    price: { type: Number, required: true },
+    discount: { type: Number, default: 0 },
+    image: { type: String },
+    category: [{
+        title: { type: String, required: true },
+    }],
+    author: { type: Schema.Types.ObjectId, ref: 'Author', required: true }
 });
 
 
